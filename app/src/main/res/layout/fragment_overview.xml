@@ -1,0 +1,272 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#ffffff"
+    tools:context="com.shadesix.courierit.fragments.OverviewFragment">
+
+ <RelativeLayout
+     android:layout_width="match_parent"
+     android:layout_height="match_parent">
+
+   <ImageView
+       android:layout_width="80dp"
+       android:layout_height="80dp"
+       android:layout_centerHorizontal="true"
+       android:src="@drawable/stand"
+       android:id="@+id/img_stand"
+       android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Standard"
+        android:textSize="15dp"
+        android:id="@+id/txt_std"
+        android:textColor="@color/colorPrimary"
+        android:layout_below="@id/img_stand"
+        android:gravity="center"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Your Parcel will be delivered in 2-5 days"
+        android:textSize="12dp"
+        android:id="@+id/txt_parcel"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/txt_std"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/colorPrimary"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rel_addr"
+        android:layout_below="@id/txt_parcel">
+
+     <RelativeLayout
+         android:layout_width="1dp"
+         android:layout_height="match_parent"
+         android:layout_centerInParent="true"
+         android:id="@+id/partition"
+         android:layout_alignTop="@id/txt_name"
+         android:background="@color/colorPrimary"
+         android:layout_alignBottom="@id/my_city_state"/>
+
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="From Address"
+           android:id="@+id/txt_addr"
+           android:textColor="@color/colorPrimary"
+           android:layout_marginTop="15dp"
+           android:layout_marginLeft="25dp"
+           android:textSize="12dp"/>
+
+        <Button
+            android:layout_width="40dp"
+            android:layout_height="15dp"
+            android:text="EDIT"
+            android:id="@+id/fromedit"
+            android:textColor="#ffffff"
+            android:layout_toRightOf="@+id/txt_addr"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="17dp"
+            android:background="@color/colorPrimary"/>
+
+       <RelativeLayout
+           android:layout_width="match_parent"
+           android:layout_height="1dp"
+           android:layout_below="@id/txt_addr"
+           android:background="#f05045"
+           android:layout_alignLeft="@id/txt_addr"
+           android:layout_alignRight="@id/txt_addr"/>
+
+       <EditText
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="Ramu Kumar"
+           android:textSize="12dp"
+           android:background="@color/transparent"
+           android:id="@+id/txt_name"
+           android:textColor="@color/colorPrimary"
+           android:layout_below="@id/txt_addr"
+           android:layout_marginTop="10dp"
+           android:layout_alignLeft="@id/txt_addr"
+           />
+
+       <EditText
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="wsfjbw kwbfjcqkwc lkcndlaq"
+           android:textSize="12dp"
+           android:id="@+id/my_addr"
+           android:background="@color/transparent"
+           android:textColor="@color/colorPrimary"
+           android:layout_below="@id/txt_name"
+           android:layout_marginTop="5dp"
+           android:layout_toLeftOf="@id/partition"
+           android:layout_marginRight="10dp"
+           android:layout_alignLeft="@id/txt_addr"
+           />
+
+       <EditText
+           android:layout_width="wrap_content"
+           android:background="@color/transparent"
+           android:layout_height="wrap_content"
+           android:text="wsfjbw kwbfjcqkwc lkcndlaq"
+           android:textSize="12dp"
+           android:id="@+id/my_city_state"
+           android:textColor="@color/colorPrimary"
+           android:layout_below="@id/my_addr"
+           android:layout_marginTop="5dp"
+           android:layout_toLeftOf="@id/partition"
+           android:layout_marginRight="10dp"
+           android:layout_alignLeft="@id/txt_addr"
+           />
+
+     <TextView
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="To Address"
+         android:layout_toRightOf="@id/partition"
+         android:id="@+id/txt_to_addr"
+         android:textColor="@color/colorPrimary"
+         android:layout_marginTop="15dp"
+         android:layout_marginLeft="15dp"
+         android:textSize="12dp"/>
+        <Button
+            android:layout_width="40dp"
+            android:layout_height="15dp"
+            android:text="EDIT"
+            android:id="@+id/toedit"
+            android:textColor="#ffffff"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="17dp"
+            android:background="@color/colorPrimary"/>
+
+     <RelativeLayout
+         android:layout_width="match_parent"
+         android:layout_height="1dp"
+         android:layout_below="@id/txt_to_addr"
+         android:background="#f05045"
+         android:layout_alignLeft="@id/txt_to_addr"
+         android:layout_alignRight="@id/txt_to_addr"/>
+
+     <EditText
+         android:layout_width="wrap_content"
+         android:background="@color/transparent"
+         android:layout_height="wrap_content"
+         android:text="Ramu Kumar"
+         android:textSize="12dp"
+         android:id="@+id/txt_to_name"
+         android:textColor="@color/colorPrimary"
+         android:layout_below="@id/txt_to_addr"
+         android:layout_marginTop="10dp"
+         android:layout_alignLeft="@id/txt_to_addr"/>
+
+     <EditText
+         android:layout_width="wrap_content"
+         android:background="@color/transparent"
+         android:layout_height="wrap_content"
+         android:text="wsfjbw kwbfjcqkwc lkcndlaq"
+         android:textSize="12dp"
+         android:id="@+id/my_to_addr"
+         android:textColor="@color/colorPrimary"
+         android:layout_below="@id/txt_name"
+         android:layout_marginTop="5dp"
+         android:layout_marginRight="10dp"
+         android:layout_alignLeft="@id/txt_to_addr"/>
+
+     <EditText
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:background="@color/transparent"
+         android:text="wsfjbw kwbfjcqkwc lkcndlaq"
+         android:textSize="12dp"
+         android:id="@+id/my_to_city_state"
+         android:textColor="@color/colorPrimary"
+         android:layout_below="@id/my_addr"
+         android:layout_marginTop="5dp"
+         android:layout_marginRight="10dp"
+         android:layout_alignLeft="@id/txt_to_addr"/>
+    </RelativeLayout>
+
+     <com.kyleduo.switchbutton.SwitchButton
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:id="@+id/switch_notification"
+         app:kswThumbColor="@color/colorPrimary"
+         android:layout_below="@id/rel_addr"
+         android:layout_marginTop="20dp"
+         android:layout_centerHorizontal="true"
+         android:background="@drawable/oval"
+         app:kswThumbMargin="5dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Keep Delivery Notification Off"
+        android:textSize="12dp"
+        android:layout_below="@id/switch_notification"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/colorPrimary"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Send Live Notification To Receiver"
+        android:id="@+id/txt_receiver"
+        android:textColor="@color/colorPrimary"
+        android:textSize="12dp"
+        android:layout_below="@id/switch_notification"
+        android:layout_marginTop="50dp"
+        android:layout_centerHorizontal="true"/>
+
+ <LinearLayout
+     android:layout_width="match_parent"
+     android:layout_height="40dp"
+     android:background="@drawable/orange_rect_white"
+     android:layout_below="@id/txt_receiver"
+     android:layout_marginRight="40dp"
+     android:layout_marginTop="10dp"
+     android:id="@+id/ll_receiver"
+     android:layout_centerHorizontal="true">
+  <ImageView
+      android:layout_width="25dp"
+      android:layout_height="25dp"
+      android:layout_gravity="center_vertical"
+      android:src="@drawable/receiver"
+      android:layout_marginLeft="10dp"/>
+  <EditText
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:textSize="12dp"
+      android:hint="Receiver Phone Number / Mail ID"
+      android:textCursorDrawable="@drawable/orange_cursor"
+      android:inputType="textCapWords|textCapSentences"
+      android:background="@android:color/transparent"
+      android:layout_marginLeft="10dp"
+      android:layout_gravity="center_vertical|center_horizontal"
+      android:textColor="@color/colorPrimary"
+      android:textColorHint="#f05045"
+      android:id="@+id/edt_username" />
+ </LinearLayout>
+
+ <Button
+     android:layout_width="match_parent"
+     android:layout_height="50dp"
+     android:id="@+id/btn_save"
+     android:layout_marginTop="25dp"
+     android:layout_below="@id/ll_receiver"
+     android:background="@color/colorPrimary"
+     android:layout_alignParentBottom="true"
+     android:text="Save and Continue"
+     android:textColor="#ffffff" />
+
+ </RelativeLayout>
+
+</ScrollView>

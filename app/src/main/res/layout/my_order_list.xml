@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:padding="10dp"
+    android:id="@+id/rel"
+    android:background="#3c4648"
+    android:layout_height="100dp">
+
+    <ImageView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:id="@+id/img_cmpny"
+        android:background="#ffffff"/>
+
+    <ImageView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:id="@+id/img_type"
+        android:src="@drawable/standard"
+        android:layout_alignParentRight="true"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/img_cmpny"
+        android:layout_toLeftOf="@id/img_type"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
+        android:id="@+id/rel_txt"
+        android:orientation="horizontal"
+        android:layout_marginRight="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ordered"
+            android:textColor="#ffffff"
+            android:textSize="12dp"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/txt_ordered"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Shipped"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:textColor="#ffffff"
+            android:textSize="12dp"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/txt_shipped"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/img_cmpny"
+        android:layout_toLeftOf="@id/img_type"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
+        android:id="@+id/rel_txt_2"
+        android:layout_below="@id/rel_txt"
+        android:orientation="horizontal"
+        android:layout_marginRight="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Packaged"
+            android:textColor="#ffffff"
+            android:textSize="12dp"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/txt_packaged"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Delivered"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:textColor="#ffffff"
+            android:textSize="12dp"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/txt_delivered"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/img_cmpny"
+        android:layout_toLeftOf="@id/img_type"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
+        android:id="@+id/ll_price"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:layout_marginRight="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Price: "
+            android:textColor="#ffffff"
+            android:textSize="15dp"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/txt_price"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="129.99"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:textColor="#ffffff"
+            android:textSize="12dp"
+            android:id="@+id/price_val"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Qty: "
+            android:textColor="#ffffff"
+            android:textSize="15dp"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/txt_qty"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:textColor="#ffffff"
+            android:textSize="12dp"
+            android:id="@+id/qty_val"/>
+    </LinearLayout>
+
+</RelativeLayout>
