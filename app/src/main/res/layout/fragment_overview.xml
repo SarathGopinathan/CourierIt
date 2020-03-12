@@ -258,9 +258,9 @@
 
  <Button
      android:layout_width="match_parent"
-     android:layout_height="50dp"
+     android:layout_height="51dp"
      android:id="@+id/btn_save"
-     android:layout_marginTop="25dp"
+     android:layout_marginTop="50dp"
      android:layout_below="@id/ll_receiver"
      android:background="@color/colorPrimary"
      android:layout_alignParentBottom="true"

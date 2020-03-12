@@ -27,7 +27,7 @@ public class ChooseCourierActivity extends AppCompatActivity {
     RecyclerView rv_courier;
     CourierAdapter courierAdapter;
     ArrayList<CourierCompanyModel> courierList = new ArrayList<>();
-    String toaddress,fromaddress,wt,nopkg,dt,tm,dec,couriertype,priority;
+//    String toaddress,fromaddress,wt,nopkg,dt,tm,dec,couriertype,priority;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

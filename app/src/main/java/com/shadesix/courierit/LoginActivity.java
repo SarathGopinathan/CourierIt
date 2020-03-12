@@ -1,17 +1,11 @@
 package com.shadesix.courierit;
 
-import android.Manifest;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.net.Uri;
-import android.provider.Settings;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -23,9 +17,7 @@ import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
-import com.shadesix.courierit.helpers.GPSTracker;
-import com.shadesix.courierit.models.LoginModel;
-import com.shadesix.courierit.models.RegistrationModel2;
+import com.shadesix.courierit.models.LoginModel2;
 import com.shadesix.courierit.utils.Constant;
 import com.shadesix.courierit.utils.Utils;
 
@@ -116,10 +108,15 @@ public class LoginActivity extends AppCompatActivity {
 
         @Override
         public void onSuccess(int statusCode, cz.msebera.android.httpclient.Header[] headers, byte[] responseBody) {
-            LoginModel deals = new Gson().fromJson(new String(responseBody), LoginModel.class);
+            LoginModel2 deals = new Gson().fromJson(new String(responseBody), LoginModel2.class);
             if (deals.success == 1) {
 
+                Log.e("Login","Authkey "+deals.authkey);
                 Utils.saveToUserDefaults(LoginActivity.this,Constant.PARAM_AUTHKEY,deals.authkey);
+                Utils.saveToUserDefaults(LoginActivity.this,Constant.PARAM_USERNAME,deals.userdetail.user_name);
+                Utils.saveToUserDefaults(LoginActivity.this,Constant.PARAM_EMAIL,deals.userdetail.email);
+                Utils.saveToUserDefaults(LoginActivity.this,Constant.PARAM_PHONE,deals.userdetail.phone);
+
                 Toast.makeText(LoginActivity.this,deals.message,Toast.LENGTH_SHORT).show();
 
                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
@@ -133,7 +130,7 @@ public class LoginActivity extends AppCompatActivity {
 
         @Override
         public void onFailure(int statusCode, cz.msebera.android.httpclient.Header[] headers, byte[] responseBody, Throwable error) {
-            Toast.makeText(getBaseContext(),"Seems like your network connectivity is down or very slow", Toast.LENGTH_LONG).show();
+                Toast.makeText(getBaseContext(),"Seems like your network connectivity is down or very slow", Toast.LENGTH_LONG).show();
             progress.dismiss();
         }
     }

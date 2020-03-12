@@ -7,13 +7,13 @@ import com.google.gson.annotations.SerializedName;
  */
 
 public class LoginModel {
-    @SerializedName("success")
-    public int success;
 
-    @SerializedName("message")
-    public String message;
+    @SerializedName("email")
+    public String email;
 
-    @SerializedName("auth_key")
-    public String authkey;
+    @SerializedName("phone")
+    public String phone;
 
+    @SerializedName("user_name")
+    public String user_name;
 }

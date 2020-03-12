@@ -3,20 +3,15 @@ package com.shadesix.courierit;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -49,7 +44,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(),DomesticInternationalActivity.class);
                 startActivity(intent);
-                overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+//                overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+                finish();
             }
         });
 
@@ -90,6 +86,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //                profileimg.getDrawable().setColorFilter(getResources().getColor(R.color.selectedColor), PorterDuff.Mode.SRC_ATOP);
 //                profile.setTextColor(Color.parseColor("#ffffff"));
                 startActivity(new Intent(MainActivity.this,UserDetailActivity.class));
+                finish();
             }
         });
         signout.setOnClickListener(new View.OnClickListener() {
@@ -133,6 +130,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void logoutuser() {
 
         Utils.saveToUserDefaults(MainActivity.this, Constant.PARAM_TO_ADDRESS,"");
+        Utils.saveToUserDefaults(MainActivity.this, Constant.PARAM_TO_NAME,"");
+        Utils.saveToUserDefaults(MainActivity.this, Constant.PARAM_TO_CITY,"");
+        Utils.saveToUserDefaults(MainActivity.this, Constant.PARAM_TO_STATE,"");
+        Utils.saveToUserDefaults(MainActivity.this, Constant.PARAM_TO_COUNTRY,"");
+        Utils.saveToUserDefaults(MainActivity.this, Constant.PARAM_TO_ZIP_CODE,"");
         Utils.saveToUserDefaults(MainActivity.this, Constant.PARAM_FROM_ADDRESS,"");
         Utils.saveToUserDefaults(MainActivity.this, Constant.PARAM_WEIGHT,"");
         Utils.saveToUserDefaults(MainActivity.this, Constant.PARAM_NO_PACKAGE,"");

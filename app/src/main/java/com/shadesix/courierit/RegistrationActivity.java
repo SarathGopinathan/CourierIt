@@ -142,6 +142,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 Utils.saveToUserDefaults(RegistrationActivity.this,Constant.PARAM_USERNAME,fname.getText().toString()+" "+lname.getText().toString());
                 Utils.saveToUserDefaults(RegistrationActivity.this,Constant.PARAM_EMAIL,email.getText().toString());
                 Utils.saveToUserDefaults(RegistrationActivity.this,Constant.PARAM_PHONE,phone.getText().toString());
+                Utils.saveToUserDefaults(RegistrationActivity.this,Constant.PARAM_AUTHKEY,phone.getText().toString());
 
                 Toast.makeText(RegistrationActivity.this,deals.message,Toast.LENGTH_SHORT).show();
 
@@ -164,7 +165,6 @@ public class RegistrationActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-
         startActivity(new Intent(RegistrationActivity.this, LoginActivity.class));
         finish();
     }

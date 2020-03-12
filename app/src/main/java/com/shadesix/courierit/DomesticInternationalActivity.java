@@ -3,28 +3,30 @@ package com.shadesix.courierit;
 import android.Manifest;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
-import android.os.Handler;
+import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 import com.shadesix.courierit.helpers.GPSTracker;
+import com.shadesix.courierit.models.UserAddressModel;
 import com.shadesix.courierit.utils.Constant;
 import com.shadesix.courierit.utils.Utils;
 
@@ -34,8 +36,10 @@ import java.util.Locale;
 public class DomesticInternationalActivity extends AppCompatActivity {
 
     ImageView backArrow;
+    String saddress,scity,sstate,szip,scountry;
     Geocoder geocoder;
     List<Address> addresses;
+    ProgressDialog progress;
     static final String TAG = DomesticInternationalActivity.class.getSimpleName();
     public static double lat_reg,long_reg;
     GPSTracker gps;
@@ -49,6 +53,7 @@ public class DomesticInternationalActivity extends AppCompatActivity {
         backArrow = (ImageView) findViewById(R.id.img_back);
         domestic = (RelativeLayout) findViewById(R.id.rel_domestic);
         international = (RelativeLayout) findViewById(R.id.rel_international);
+        progress = new ProgressDialog(this);
 
         locationpermission();
 
@@ -63,6 +68,7 @@ public class DomesticInternationalActivity extends AppCompatActivity {
                     Utils.saveToUserDefaults(DomesticInternationalActivity.this, Constant.PARAM_TYPE, "Domestic");
                     Intent intent = new Intent(DomesticInternationalActivity.this, PackageDetailActivity.class);
                     startActivity(intent);
+                    finish();
                 }
             }
         });
@@ -76,6 +82,7 @@ public class DomesticInternationalActivity extends AppCompatActivity {
                     Utils.saveToUserDefaults(DomesticInternationalActivity.this, Constant.PARAM_TYPE, "International");
                     Intent intent = new Intent(DomesticInternationalActivity.this, PackageDetailActivity.class);
                     startActivity(intent);
+                    finish();
                 }
             }
         });
@@ -85,7 +92,8 @@ public class DomesticInternationalActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(DomesticInternationalActivity.this,MainActivity.class);
                 startActivity(intent);
-                overridePendingTransition(R.anim.slide_out, R.anim.slide_in);
+//                overridePendingTransition(R.anim.slide_out, R.anim.slide_in);
+                finish();
             }
         });
     }
@@ -171,19 +179,78 @@ public class DomesticInternationalActivity extends AppCompatActivity {
                     alert11.show();
                 }
                 else{
+
+                    saddress=address.getText().toString();
+                    scity=city.getText().toString();
+                    sstate=state.getText().toString();
+                    scountry=country.getText().toString();
+                    szip=zip.getText().toString();
                     Utils.saveToUserDefaults(DomesticInternationalActivity.this,Constant.PARAM_FROM_ADDRESS,address.getText().toString());
                     Utils.saveToUserDefaults(DomesticInternationalActivity.this,Constant.PARAM_CITY,city.getText().toString());
                     Utils.saveToUserDefaults(DomesticInternationalActivity.this,Constant.PARAM_STATE,state.getText().toString());
                     Utils.saveToUserDefaults(DomesticInternationalActivity.this,Constant.PARAM_COUNTRY,country.getText().toString());
                     Utils.saveToUserDefaults(DomesticInternationalActivity.this,Constant.PARAM_ZIP_CODE,zip.getText().toString());
 
+                    progress.setMessage("Saving...");
+                    progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                    progress.setIndeterminate(true);
+                    progress.setCancelable(false);
+                    progress.show();
+                    AsyncHttpClient client = new AsyncHttpClient();
+                    final int DEFAULT_TIMEOUT = 20 * 10000;
+                    RequestParams params = new RequestParams();
+                    params.put("name",Utils.getFromUserDefaults(DomesticInternationalActivity.this,Constant.PARAM_USERNAME));
+                    Log.e("DomInter","Authkey"+Utils.getFromUserDefaults(DomesticInternationalActivity.this,Constant.PARAM_AUTHKEY));
+
+                    params.put("address",address.getText().toString());
+                    params.put("city",city.getText().toString());
+                    params.put("state",state.getText().toString());
+                    params.put("country",country.getText().toString());
+                    params.put("pincode",zip.getText().toString());
+                    client.setTimeout(DEFAULT_TIMEOUT);
+                    client.addHeader("auth-token",Utils.getFromUserDefaults(DomesticInternationalActivity.this,Constant.PARAM_AUTHKEY));
+//                    client.post("url?name="+Utils.getFromUserDefaults(DomesticInternationalActivity.this,Constant.PARAM_USERNAME)
+//                            +"&address="+address.getText().toString()+"&city="+city.getText().toString()+"&country="+country.getText().toString()
+//                            +"&state="+state.getText().toString()+"&pincode="+zip.getText().toString(), params, new DomesticInternationalActivity.GetMyDealsResponsehandler());
+                    //post_address_values();
+
+                    client.post(Constant.PARAM_BASE_URL+"address",params,new DomesticInternationalActivity.GetMyDealsResponsehandler());
+                    dialog.dismiss();
                     startActivity(new Intent(DomesticInternationalActivity.this,PackageDetailActivity.class));
-                    dialog.cancel();
+                    finish();
                 }
             }
         });
 
         dialog.show();
+    }
+
+    public class GetMyDealsResponsehandler extends AsyncHttpResponseHandler {
+
+        @Override
+        public void onSuccess(int statusCode, cz.msebera.android.httpclient.Header[] headers, byte[] responseBody) {
+            UserAddressModel deals = new Gson().fromJson(new String(responseBody), UserAddressModel.class);
+            if (deals.success == 1) {
+
+//                Utils.saveToUserDefaults(DomesticInternationalActivity.this,Constant.PARAM_FROM_ADDRESS,saddress);
+//                Utils.saveToUserDefaults(DomesticInternationalActivity.this,Constant.PARAM_CITY,scity);
+//                Utils.saveToUserDefaults(DomesticInternationalActivity.this,Constant.PARAM_STATE,sstate);
+//                Utils.saveToUserDefaults(DomesticInternationalActivity.this,Constant.PARAM_COUNTRY,scountry);
+//                Utils.saveToUserDefaults(DomesticInternationalActivity.this,Constant.PARAM_ZIP_CODE,szip);
+
+                Toast.makeText(DomesticInternationalActivity.this,deals.message,Toast.LENGTH_SHORT).show();
+            }
+            else{
+                Toast.makeText(DomesticInternationalActivity.this,deals.message,Toast.LENGTH_SHORT).show();
+            }
+            progress.dismiss();
+        }
+
+        @Override
+        public void onFailure(int statusCode, cz.msebera.android.httpclient.Header[] headers, byte[] responseBody, Throwable error) {
+            Toast.makeText(getBaseContext(),"Seems like your network connectivity is down or very slow", Toast.LENGTH_LONG).show();
+            progress.dismiss();
+        }
     }
 
     private void locationpermission() {
@@ -258,6 +325,14 @@ public class DomesticInternationalActivity extends AppCompatActivity {
                 }
             }
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        startActivity(new Intent(DomesticInternationalActivity.this,MainActivity.class));
+        finish();
     }
 
     public void turnGPS(){
